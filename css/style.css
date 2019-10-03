@@ -6,6 +6,7 @@
         line-height: 1.5;
         padding: 0;
 }
+
 /*Adding colors to make organization visually easier*/
 
 body { 
@@ -14,11 +15,44 @@ body {
 
 section {
     background-color: brown;
+    width: 100%;
 }
+
 /*Moving things around*/
 
 nav {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
+aside {
+    display: flex;
+    justify-content: center;
+    background-color: azure;
+    width: 25%;
+}
+
+.dock {
+    display: flex;
+    justify-content: center;
+    background-color: blueviolet;
+}
+
+.dealer-dock {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.player-dock {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.mid-bar {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
