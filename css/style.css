@@ -41,24 +41,8 @@ aside {
     display: flex;
     justify-content: space-between;
     width: 100%;
-}
-
-.dock {
-    display: flex;
-    justify-content: center;
-    background-color: blueviolet;
-}
-
-.dealer-dock {
-    display: flex;
-    justify-content: center;
+    height:300px;
     margin: 20px 0;
-}
-
-.player-dock {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
 }
 
 .deck {
@@ -69,4 +53,37 @@ aside {
 .button {
     display: flex;
     flex-direction: column;
+}
+
+.dealer-hand {
+    background-color: yellowgreen;
+    height: 200px;
+    width: 150px;
+    margin: 20px 0;
+}
+
+.player-hand {
+    background-color: yellowgreen;
+    height: 200px;
+    width: 150px;
+    margin: 20px 0;
+}
+
+.display {
+    width: 150px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.dock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.side-buttons {
+    display: flex;
+    align-items: center;
 }

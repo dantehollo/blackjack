@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link defer src="js/apps.js" />
     <title>Document</title>
 </head>
+
 <body>
     <div class="wrapper">
         <nav class="ui-bar">
@@ -18,25 +20,27 @@
                 <h2>$1000</h2>
             </div>
         </nav>
-        <section class="dealer-dock">
-            <div class="dealers-hand">
-                <h1>Dealer's Hand</h1>
+        <section class="dock">
+            <div class="dealer-hand">
+                <!---Append cards here-->
             </div>
         </section>
         <section class="mid-bar">
             <div class="side-buttons">
-                <div class="button">
-                    <button id="hit">
-                        hit
-                    </button>
+                <div id="amount-bet">
+                    <h2>$200</h2>
                 </div>
-                <div class="display">
-                    <h2>Amount Bet</h2>
-                </div>
-                <div class="button">
-                    <button id="stand">
-                        stand
-                    </button>
+                <div id="button-container">
+                    <div class="button">
+                        <button id="hit">
+                            hit
+                        </button>
+                    </div>
+                    <div class="button">
+                        <button id="stand">
+                            stand
+                        </button>
+                    </div>
                 </div>
             </div>
             <aside>
@@ -45,14 +49,12 @@
                 </div>
             </aside>
         </section>
-        <section class="player-dock">
+        <section class="dock">
             <div class="player-hand">
-                <h1>Player's Cards</h1>
-            </div>
-            <div class="display">
-                <h2>Sum of Cards</h2>
+                <!--Append cards here-->
             </div>
         </section>
     </div>
 </body>
+
 </html>
