@@ -2,7 +2,7 @@ const deck = [
     aceOfSpades = {
         value: 1 || 11,
         name: 'Ace of Spades',
-        img: src=""
+        image: "img/cards/spades/A.png"
     },
     twoOfSpades = {
         value: 2,
@@ -30,38 +30,38 @@ const deck = [
         img: src=""
     },
     sevenOfSpades = {
-        value: ,
-        name: 'Ace of Spades',
+        value: 7,
+        name: 'Seven of Spades',
         img: src=""
     },
-    aceOfSpades = {
-        value: 1 || 11,
-        name: 'Ace of Spades',
+    eightOfSpades = {
+        value: 8,
+        name: 'Eight of Spades',
         img: src=""
     },
-    aceOfSpades = {
-        value: 1 || 11,
-        name: 'Ace of Spades',
+    nineOfSpades = {
+        value: 9,
+        name: 'Nine of Spades',
         img: src=""
     },
-    aceOfSpades = {
-        value: 1 || 11,
-        name: 'Ace of Spades',
+    tenOfSpades = {
+        value: 10,
+        name: 'Ten of Spades',
         img: src=""
     },
-    aceOfSpades = {
-        value: 1 || 11,
-        name: 'Ace of Spades',
+    jackOfSpades = {
+        value: 10,
+        name: 'Jack of Spades',
         img: src=""
     },
-    aceOfSpades = {
-        value: 1 || 11,
-        name: 'Ace of Spades',
+    queenOfSpades = {
+        value: 10,
+        name: 'Queen of Spades',
         img: src=""
     },
-    aceOfSpades = {
-        value: 1 || 11,
-        name: 'Ace of Spades',
+    kingOfSpades = {
+        value: 10,
+        name: 'King of Spades',
         img: src=""
     },
 ]
