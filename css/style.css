@@ -28,10 +28,9 @@ aside {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: azure;
     width: 20%;
     height: 95%;
-    margin: 0 7px;
+    margin: 0;
 }
 
 section {
@@ -103,6 +102,13 @@ section {
 
 .button {
     width: 75px;
+}
+
+.img-deck {
+    height: 250px;
+    width: auto;
+    display: flex;
+    align-items: center;
 }
 
 /* ID's */
