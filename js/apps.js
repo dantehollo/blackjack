@@ -342,6 +342,10 @@ let hit = () => {
     hand.append(card)
 }
 
+// Event listener for hit 
+const hitButton = document.getElementById('hit')
+hitButton.addEventListener('click', hit)
+
 // Creating stand
 const stand = () => {
 
@@ -392,25 +396,34 @@ standButton.addEventListener('click', stand)
 const deal = () => {
     // check if playerHand and houseHand have a .length of more than 0
     for(let i = 0; i < player.handArr.length; i++) {
+        if(player.handArr.length > 0) {
         let returnToDeck = player.handArr.pop()
-        let returnToDeckHouse = house.handArr.pop()
         deck.push(returnToDeck)
-        deck.push(returnToDeckHouse)
+        }
+    }
+    for( let i = 0; i < player.handArr.length; i++){
+        if(player.handArr.length > 0){
+            let returnToDeckHouse = house.handArr.pop()
+            deck.push(returnToDeckHouse)
+        }
     }
     // if more than 0, pop() both arrays and push() both cards back into the deck
     // once playerHand and houseHand are empty run shuffle
+    shuffle(deck)
     // hit player twice
+    for(let i = 0; i = 2; i++) {
+        hit()
+    }
     // hit dealer twice
 }
+
+const dealButton = document.getElementById('deal')
+dealButton.addEventListener('click', deal)
 
 // Win condition
 // house.handValue < player.handValue <= 21  
 
 // Aces
-
-// Event listener for hit 
-const hitButton = document.getElementById('hit')
-hitButton.addEventListener('click', hit)
 
 // Shuffling the deck
 const shuffle = (deck) => {
