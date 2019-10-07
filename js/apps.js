@@ -340,6 +340,35 @@ let hit = () => {
     hand.append(card)
 }
 
+// Creating stand
+
+
+let houseHit = () => {
+    let cardInHand = []
+    let topCard = deck.pop()
+    let newVal = topCard.value + house.handValue
+    house.handValue = newVal
+    cardInHand.push(topCard)
+    console.log(house.handValue)
+    
+    // Placing the card in the UI
+    let card = document.createElement('img')
+    card.setAttribute("src", topCard.src)
+    card.setAttribute("class", "card")
+    const hand = document.getElementsByClassName('dealer-hand')[0]
+    hand.append(card)
+}
+
+const hitButton = document.getElementById('stand')
+hitButton.addEventListener('click', houseHit)
+
+// Creating deal
+
+// Win condition
+// house.handValue < player.handValue <= 21  
+
+// Aces
+
 // Event listener for hit 
 const hitButton = document.getElementById('hit')
 hitButton.addEventListener('click', hit)
