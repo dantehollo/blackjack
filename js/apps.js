@@ -1,6 +1,6 @@
 // Using https://www.thatsoftwaredude.com/content/6196/coding-a-card-deck-in-javascript as a base
 
-// Deck creation
+// Creating the deck
 const deck = [
     twoSpade = {
         value: 2,
@@ -317,12 +317,27 @@ const deck = [
 console.log(deck)
 
 // Creating the cards
-let card = document.createElement('div')
-for(let i = 0; i < deck.length; i++) {
-    card.setAttribute("src", deck[i])
+let hit = (deck) => {
+    let cardInHand = []
+    let topCard = deck.pop()
+    cardInHand.push(topCard)
+    // console.log(cardInHand[i].value)
+    // Adding the values together
+    for( let i = 0; i < cardInHand.length; i++) {
+        if (cardInHand.length > 0) {
+            let cardValue = cardInHand[i].value
+            console.log(cardValue)
+            }
+            console.log(cardValue)
+    }
+    
+    // Placing the ard in the UI
+    let card = document.createElement('img')
+    card.setAttribute("src", topCard.src)
+    const hand = document.getElementsByClassName('player-hand')[0]
+    hand.append(card)
 }
 
-card.setAttribute("src", deck[i])
 
 
 // document.getElementsByClassName('player-hand')[0].append(deck[0])
@@ -340,11 +355,5 @@ const shuffle = (deck) => {
 }
 
 // Moving card from deck to hand
-let hit = => () {
-
-}
-
-
 
 // if player has no cards or winner declared, deal 2 cards on hit. Otherwise, deal one
-// 
