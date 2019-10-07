@@ -317,21 +317,30 @@ const deck = [
 console.log(deck)
 
 // Creating the cards
-let hit = (deck) => {
+let hit = () => {
     let cardInHand = []
     let topCard = deck.pop()
+    let cardValue = ''
     cardInHand.push(topCard)
     // console.log(cardInHand[i].value)
+
     // Adding the values together
     for( let i = 0; i < cardInHand.length; i++) {
-        if (cardInHand.length > 0) {
-            let cardValue = cardInHand[i].value
+        if (cardInHand.length === 0) {
+            cardValue = cardInHand[i].value
             console.log(cardValue)
-            }
-            console.log(cardValue)
+        } //esle cardValue === 21 run victory
+
+        const addTogether = (cardInHand[i].value) => {
+        let a = cardInHand[i], b = cardInHand[i-1], temp;
+            temp = a
+            a = a + b
+            b = temp
+
+        }   return b
     }
     
-    // Placing the ard in the UI
+    // Placing the card in the UI
     let card = document.createElement('img')
     card.setAttribute("src", topCard.src)
     const hand = document.getElementsByClassName('player-hand')[0]
@@ -340,7 +349,9 @@ let hit = (deck) => {
 
 
 
-// document.getElementsByClassName('player-hand')[0].append(deck[0])
+const hitButton = document.getElementById('hit')
+hitButton.addEventListener('click', hit)
+// console.log(hitButton)
 
 // Shuffling the deck
 const shuffle = (deck) => {
