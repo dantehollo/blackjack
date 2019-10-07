@@ -314,21 +314,22 @@ const deck = [
         src: 'img/cards/hearts/A.png'
     },
 ];
-console.log(deck)
+
 
 // Creating the cards
 let hit = () => {
     let cardInHand = []
     let topCard = deck.pop()
-    let cardValue = ''
+    let playerPoints = 0
+    let addVal = topCard.value
+    let newVal = playerPoints + addVal
+    playerPoints = newVal 
     cardInHand.push(topCard)
-
+console.log(playerPoints)
     // Adding the values together
     for( let i = 0; i < cardInHand.length; i++) {
-        let playerPoints = 0
-        playerPoints = playerPoints + cardInHand[i].value
         // console.log(cardInHand[i].value)
-        console.log(playerPoints)
+        
         } 
     
     // Placing the card in the UI
