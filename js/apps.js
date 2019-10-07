@@ -315,22 +315,22 @@ const deck = [
     },
 ];
 
+let player = {
+    handValue: 0
+}
+
+let house = {
+    handValue: 0
+}
 
 // Creating the cards
 let hit = () => {
     let cardInHand = []
     let topCard = deck.pop()
-    let playerPoints = 0
-    let addVal = topCard.value
-    let newVal = playerPoints + addVal
-    playerPoints = newVal 
+    let newVal = topCard.value + player.handValue
+    player.handValue = newVal
     cardInHand.push(topCard)
-console.log(playerPoints)
-    // Adding the values together
-    for( let i = 0; i < cardInHand.length; i++) {
-        // console.log(cardInHand[i].value)
-        
-        } 
+    console.log(player.handValue)
     
     // Placing the card in the UI
     let card = document.createElement('img')
@@ -340,9 +340,9 @@ console.log(playerPoints)
     hand.append(card)
 }
 
+// Event listener for hit 
 const hitButton = document.getElementById('hit')
 hitButton.addEventListener('click', hit)
-// console.log(hitButton)
 
 // Shuffling the deck
 const shuffle = (deck) => {
