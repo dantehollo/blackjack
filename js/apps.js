@@ -341,26 +341,48 @@ let hit = () => {
 }
 
 // Creating stand
+const stand = () => {
 
+    let houseHit = () => {
+        let cardInHand = []
+        let topCard = deck.pop()
+        let newVal = topCard.value + house.handValue
+        house.handValue = newVal
+        cardInHand.push(topCard)
+        console.log(house.handValue)
+        
+        // Placing the card in the UI
+        let card = document.createElement('img')
+        card.setAttribute("src", topCard.src)
+        card.setAttribute("class", "card")
+        const hand = document.getElementsByClassName('dealer-hand')[0]
+        hand.append(card)
+    }
 
-let houseHit = () => {
-    let cardInHand = []
-    let topCard = deck.pop()
-    let newVal = topCard.value + house.handValue
-    house.handValue = newVal
-    cardInHand.push(topCard)
-    console.log(house.handValue)
-    
-    // Placing the card in the UI
-    let card = document.createElement('img')
-    card.setAttribute("src", topCard.src)
-    card.setAttribute("class", "card")
-    const hand = document.getElementsByClassName('dealer-hand')[0]
-    hand.append(card)
+    for(let i = 0; i < 10; i++) {
+        // if house.handValue > 21 ---> alert Player wins!
+        if(house.handValue > 21) {
+            alert('The player wins!')
+            console.log('first case runs')
+        } else if(house.handValue === 21) {
+            if(house.handValue > player.handValue) {
+                alert('The house wins')
+                console.log('2.1 runs')
+            } else if(house.handValue === player.handValue) {
+                alert("Draw Game")
+                console.log('2.2 runs')
+            }
+            console.log('Second case runs')
+        } else if(house.handValue < 18) {
+            houseHit()
+            console.log('Third case runs')
+        }
+        // else if house.handValue === 21 ---> compare to player.handValue
+        // otherwise hit again
+    }
 }
-
-const hitButton = document.getElementById('stand')
-hitButton.addEventListener('click', houseHit)
+const standButton = document.getElementById('stand')
+standButton.addEventListener('click', stand)
 
 // Creating deal
 
