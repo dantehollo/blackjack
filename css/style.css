@@ -64,9 +64,9 @@ section {
 
 .dock {
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 225px;
+    padding: 0 7px;
 }
 
 .dealer-hand {
@@ -77,6 +77,8 @@ section {
 }
 
 .player-hand {
+    display: flex;
+    justify-content: flex-start;
     background-color: yellowgreen;
     height: 200px;
     width: 150px;
@@ -109,6 +111,11 @@ section {
     width: auto;
     display: flex;
     align-items: center;
+}
+
+.card {
+    height: 200px;
+    width: 150px;
 }
 
 /* ID's */
