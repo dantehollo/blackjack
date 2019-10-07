@@ -315,21 +315,23 @@ const deck = [
     },
 ];
 
+// Objects for the player and house
 let player = {
-    handValue: 0
+    handValue: 0,
+    handArr: []
 }
 
 let house = {
-    handValue: 0
+    handValue: 0,
+    handArr: []
 }
 
 // Creating the cards
 let hit = () => {
-    let cardInHand = []
     let topCard = deck.pop()
     let newVal = topCard.value + player.handValue
     player.handValue = newVal
-    cardInHand.push(topCard)
+    player.handArr.push(topCard)
     console.log(player.handValue)
     
     // Placing the card in the UI
@@ -344,11 +346,10 @@ let hit = () => {
 const stand = () => {
 
     let houseHit = () => {
-        let cardInHand = []
         let topCard = deck.pop()
         let newVal = topCard.value + house.handValue
         house.handValue = newVal
-        cardInHand.push(topCard)
+        house.handArr.push(topCard)
         console.log(house.handValue)
         
         // Placing the card in the UI
@@ -364,7 +365,10 @@ const stand = () => {
         if(house.handValue > 21) {
             alert('The player wins!')
             console.log('first case runs')
-        } else if(house.handValue === 21) {
+            return
+        } 
+        // else if house.handValue === 21 ---> compare to player.handValue 
+        else if(house.handValue === 21) {
             if(house.handValue > player.handValue) {
                 alert('The house wins')
                 console.log('2.1 runs')
@@ -373,18 +377,31 @@ const stand = () => {
                 console.log('2.2 runs')
             }
             console.log('Second case runs')
-        } else if(house.handValue < 18) {
+        } 
+        // otherwise hit again
+        else if(house.handValue < 18) {
             houseHit()
             console.log('Third case runs')
         }
-        // else if house.handValue === 21 ---> compare to player.handValue
-        // otherwise hit again
     }
 }
 const standButton = document.getElementById('stand')
 standButton.addEventListener('click', stand)
 
 // Creating deal
+const deal = () => {
+    // check if playerHand and houseHand have a .length of more than 0
+    for(let i = 0; i < player.handArr.length; i++) {
+        let returnToDeck = player.handArr.pop()
+        let returnToDeckHouse = house.handArr.pop()
+        deck.push(returnToDeck)
+        deck.push(returnToDeckHouse)
+    }
+    // if more than 0, pop() both arrays and push() both cards back into the deck
+    // once playerHand and houseHand are empty run shuffle
+    // hit player twice
+    // hit dealer twice
+}
 
 // Win condition
 // house.handValue < player.handValue <= 21  
@@ -406,7 +423,5 @@ const shuffle = (deck) => {
     }
     console.log(deck)
 }
-
-// Moving card from deck to hand
 
 // if player has no cards or winner declared, deal 2 cards on hit. Otherwise, deal one
