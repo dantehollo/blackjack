@@ -315,7 +315,7 @@ const deck = [
     },
 ];
 
-// Objects for the player and house
+// Objects for the Player and House
 let player = {
     handValue: 0,
     handArr: []
@@ -326,15 +326,29 @@ let house = {
     handArr: []
 }
 
+// Creating Scorecards
 const playerScore = player.handValue
 const houseScore = house.handValue
 
-// Creating Scorecards
 let playerHeading = document.getElementById('player-heading')
 playerHeading.innerHTML = `Player: ${playerScore}`
 
 let houseHeading = document.getElementById('house-heading')
 houseHeading.innerHTML = `House: ${houseScore}`
+
+// Switching Aces
+const switchAces = (valueKey, array) => {
+    for( let i = 0; i < player.handArr.length; i++) {
+        if(player.handArr[i].value === 11) {
+            console.log(player.handArr[i].value)
+            player.handArr[i] = 1
+            console.log(player.handArr[i])
+        }
+    }
+    playerHeading.innerHTML = `Player: ${player.handValue}`
+    houseHeading.innerHTML = `House: ${house.handValue}`
+
+}
 
 // Creating Hit
 let hit = () => {
@@ -353,10 +367,11 @@ let hit = () => {
     hand.append(card)
 
     if(player.handValue > 21) {
-        let findAce = player.handArr.find(function(element) {
-            element.value === 11
-        }) 
-    } findAce = 1
+        switchAces(11, player.handArr)
+    } else {
+        // alert('Player Loses')
+    }   
+    console.log('player', player)
 }
 
 // Dealer's Hit
@@ -374,6 +389,8 @@ let houseHit = () => {
     card.setAttribute("class", "card")
     const hand = document.getElementsByClassName('house-hand')[0]
     hand.append(card)
+    console.log('house', house)
+
 }
 
 // Creating stand
@@ -468,5 +485,5 @@ const shuffle = (deck) => {
         deck[locationOne] = deck[locationTwo]
         deck[locationTwo] = tmp
     }
-    console.log(deck)
+    // console.log(deck)
 }
