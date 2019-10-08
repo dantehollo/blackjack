@@ -75,7 +75,7 @@ const deck = [
     },
 
     aceSpade = {
-        value: 1,
+        value: 11,
         suit: 'Spade',
         src: 'img/cards/spades/A.png'
     },
@@ -153,7 +153,7 @@ const deck = [
     },
 
     aceClub = {
-        value: 1,
+        value: 11,
         suit: 'Club',
         src: 'img/cards/clubs/A.png'
     },
@@ -231,7 +231,7 @@ const deck = [
     },
 
     aceDiamonds = {
-        value: 1,
+        value: 11,
         suit: 'Diamonds',
         src: 'img/cards/diamonds/A.png'
     },
@@ -309,7 +309,7 @@ const deck = [
     },
 
     aceHearts = {
-        value: 1,
+        value: 11,
         suit: 'Hearts',
         src: 'img/cards/hearts/A.png'
     },
@@ -326,33 +326,49 @@ let house = {
     handArr: []
 }
 
-// Creating the cards
+const playerScore = player.handValue
+const houseScore = house.handValue
+
+// Creating Scorecards
+let playerHeading = document.getElementById('player-heading')
+playerHeading.innerHTML = `Player: ${playerScore}`
+
+let houseHeading = document.getElementById('house-heading')
+houseHeading.innerHTML = `House: ${houseScore}`
+
+// Creating Hit
 let hit = () => {
     let topCard = deck.pop()
     let newVal = topCard.value + player.handValue
     player.handValue = newVal
+    playerHeading.innerHTML = `Player: ${player.handValue}`    
     player.handArr.push(topCard)
-    console.log(player.handValue)
+    // console.log(player.handValue)
     
-    // Placing the card in the UI
+    // Placing the Card in the UI
     let card = document.createElement('img')
     card.setAttribute("src", topCard.src)
     card.setAttribute("class", "card")
     const hand = document.getElementsByClassName('player-hand')[0]
     hand.append(card)
+
+    if(player.handValue > 21) {
+        alert('Player loses')
+    }
 }
 
-// Event listener for hit 
+// Event Listener for Hit 
 const hitButton = document.getElementById('hit')
 hitButton.addEventListener('click', hit)
 
-// Dealer's hit
+// Dealer's Hit
 let houseHit = () => {
     let topCard = deck.pop()
     let newVal = topCard.value + house.handValue
     house.handValue = newVal
+    houseHeading.innerHTML = `House: ${house.handValue}`
     house.handArr.push(topCard)
-    console.log(house.handValue)
+    // console.log(house.handValue)
     
     // Placing the card in the UI
     let card = document.createElement('img')
@@ -368,25 +384,31 @@ const stand = () => {
     for(let i = 0; i < 10; i++) {
         // if house.handValue > 21 ---> alert Player wins!
         if(house.handValue > 21) {
-            alert('The player wins!')
-            console.log('first case runs')
+            alert('The Player Wins!')
             return
         } 
         // else if house.handValue === 21 ---> compare to player.handValue 
         else if(house.handValue === 21) {
             if(house.handValue > player.handValue) {
-                alert('The house wins')
-                console.log('2.1 runs')
+                alert('The House Wins')
             } else if(house.handValue === player.handValue) {
                 alert("Draw Game")
-                console.log('2.2 runs')
             }
-            console.log('Second case runs')
         } 
         // otherwise hit again
         else if(house.handValue < 18) {
             houseHit()
-            console.log('Third case runs')
+        } else {
+            if(house.handValue > player.handValue) {
+                alert('The House wins')
+                return
+            } else if(house.handValue === player.handValue) {
+                alert('Draw Game')
+                return
+            } else if (house.handValue < player.handValue) {
+                alert('The Player Wins')
+                return
+            }
         }
     }
 }
