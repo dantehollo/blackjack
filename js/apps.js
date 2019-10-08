@@ -75,7 +75,7 @@ const deck = [
     },
 
     aceSpade = {
-        value: '',
+        value: 1,
         suit: 'Spade',
         src: 'img/cards/spades/A.png'
     },
@@ -153,7 +153,7 @@ const deck = [
     },
 
     aceClub = {
-        value: 1 || 11,
+        value: 1,
         suit: 'Club',
         src: 'img/cards/clubs/A.png'
     },
@@ -231,7 +231,7 @@ const deck = [
     },
 
     aceDiamonds = {
-        value: 1 || 11,
+        value: 1,
         suit: 'Diamonds',
         src: 'img/cards/diamonds/A.png'
     },
@@ -309,7 +309,7 @@ const deck = [
     },
 
     aceHearts = {
-        value: 1 || 11,
+        value: 1,
         suit: 'Hearts',
         src: 'img/cards/hearts/A.png'
     },
@@ -346,23 +346,24 @@ let hit = () => {
 const hitButton = document.getElementById('hit')
 hitButton.addEventListener('click', hit)
 
+// Dealer's hit
+let houseHit = () => {
+    let topCard = deck.pop()
+    let newVal = topCard.value + house.handValue
+    house.handValue = newVal
+    house.handArr.push(topCard)
+    console.log(house.handValue)
+    
+    // Placing the card in the UI
+    let card = document.createElement('img')
+    card.setAttribute("src", topCard.src)
+    card.setAttribute("class", "card")
+    const hand = document.getElementsByClassName('house-hand')[0]
+    hand.append(card)
+}
+
 // Creating stand
 const stand = () => {
-
-    let houseHit = () => {
-        let topCard = deck.pop()
-        let newVal = topCard.value + house.handValue
-        house.handValue = newVal
-        house.handArr.push(topCard)
-        console.log(house.handValue)
-        
-        // Placing the card in the UI
-        let card = document.createElement('img')
-        card.setAttribute("src", topCard.src)
-        card.setAttribute("class", "card")
-        const hand = document.getElementsByClassName('dealer-hand')[0]
-        hand.append(card)
-    }
 
     for(let i = 0; i < 10; i++) {
         // if house.handValue > 21 ---> alert Player wins!
@@ -395,26 +396,39 @@ standButton.addEventListener('click', stand)
 // Creating deal
 const deal = () => {
     // check if playerHand and houseHand have a .length of more than 0
-    for(let i = 0; i < player.handArr.length; i++) {
+    let z = player.handArr.length
+    for(let i = 0; i < z; i++) {
         if(player.handArr.length > 0) {
-        let returnToDeck = player.handArr.pop()
-        deck.push(returnToDeck)
+            let returnToDeck = player.handArr.pop()
+            let removeImage = document.getElementsByClassName('player-hand')[0]
+            deck.push(returnToDeck)
+            removeImage.removeChild(removeImage.lastChild)
+            player.handValue = 0
+            console.log(returnToDeck)
         }
     }
-    for( let i = 0; i < player.handArr.length; i++){
-        if(player.handArr.length > 0){
+    let x = house.handArr.length
+    for( let i = 0; i < x; i++){
+        if(house.handArr.length > 0){
             let returnToDeckHouse = house.handArr.pop()
+            let removeHouseImage = document.getElementsByClassName('house-hand')[0]
+            removeHouseImage.removeChild(removeHouseImage.lastChild)
+            house.handValue = 0
             deck.push(returnToDeckHouse)
+            console.log(returnToDeckHouse)
         }
     }
     // if more than 0, pop() both arrays and push() both cards back into the deck
     // once playerHand and houseHand are empty run shuffle
     shuffle(deck)
     // hit player twice
-    for(let i = 0; i = 2; i++) {
+    for(let i = 0; i < 2; i++) {
         hit()
     }
     // hit dealer twice
+    for(let i = 0; i < 2; i++) {
+        houseHit()
+    }
 }
 
 const dealButton = document.getElementById('deal')
