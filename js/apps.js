@@ -342,9 +342,11 @@ const switchAces = (array) => {
         if(player.handArr[i].value === 11) {
             // console.log(player.handArr[i].value)
             player.handArr[i].value = 1
-            // console.log(player.handArr[i].value)
-            calPlayerHand(player.handArr[i])
+            oneAce = player.handArr[i]
+            console.log(oneAce)
+            calPlayerHand(oneAce)
             console.log(player.handArr)
+            console.log('tripped')
         }
     }
 }
@@ -358,9 +360,13 @@ const calPlayerHand = (keyValue) => {
 // Creating Hit
 let hit = () => {
     let topCard = deck.pop()
-   
-    calPlayerHand(topCard, player.handValue)
-       
+    
+    if(player.handValue < 21) {
+        calPlayerHand(topCard, player.handValue)
+    } else {
+        // alert('Player Loses')
+        switchAces(player.handArr)
+    }
     player.handArr.push(topCard)
     // console.log(player.handValue)
     
@@ -372,10 +378,9 @@ let hit = () => {
     hand.append(card)
 
     if(player.handValue > 21) {
-        switchAces(player.handArr)
-    } else {
-        // alert('Player Loses')
-    }   
+        alert("Player Loses")
+    }
+
     console.log('player', player)
 }
 
