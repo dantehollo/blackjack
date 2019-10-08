@@ -337,25 +337,30 @@ let houseHeading = document.getElementById('house-heading')
 houseHeading.innerHTML = `House: ${houseScore}`
 
 // Switching Aces
-const switchAces = (valueKey, array) => {
+const switchAces = (array) => {
     for( let i = 0; i < player.handArr.length; i++) {
         if(player.handArr[i].value === 11) {
-            console.log(player.handArr[i].value)
-            player.handArr[i] = 1
-            console.log(player.handArr[i])
+            // console.log(player.handArr[i].value)
+            player.handArr[i].value = 1
+            // console.log(player.handArr[i].value)
+            calPlayerHand(player.handArr[i])
+            console.log(player.handArr)
         }
     }
-    playerHeading.innerHTML = `Player: ${player.handValue}`
-    houseHeading.innerHTML = `House: ${house.handValue}`
+}
 
+const calPlayerHand = (keyValue) => {
+    let newVal = keyValue.value + player.handValue
+    player.handValue = newVal
+    playerHeading.innerHTML = `Player: ${player.handValue}`
 }
 
 // Creating Hit
 let hit = () => {
     let topCard = deck.pop()
-    let newVal = topCard.value + player.handValue
-    player.handValue = newVal
-    playerHeading.innerHTML = `Player: ${player.handValue}`    
+   
+    calPlayerHand(topCard, player.handValue)
+       
     player.handArr.push(topCard)
     // console.log(player.handValue)
     
@@ -367,7 +372,7 @@ let hit = () => {
     hand.append(card)
 
     if(player.handValue > 21) {
-        switchAces(11, player.handArr)
+        switchAces(player.handArr)
     } else {
         // alert('Player Loses')
     }   
