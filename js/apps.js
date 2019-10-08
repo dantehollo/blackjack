@@ -353,13 +353,11 @@ let hit = () => {
     hand.append(card)
 
     if(player.handValue > 21) {
-        alert('Player loses')
-    }
+        let findAce = player.handArr.find(function(element) {
+            element.value === 11
+        }) 
+    } findAce = 1
 }
-
-// Event Listener for Hit 
-const hitButton = document.getElementById('hit')
-hitButton.addEventListener('click', hit)
 
 // Dealer's Hit
 let houseHit = () => {
@@ -412,8 +410,6 @@ const stand = () => {
         }
     }
 }
-const standButton = document.getElementById('stand')
-standButton.addEventListener('click', stand)
 
 // Creating deal
 const deal = () => {
@@ -426,7 +422,7 @@ const deal = () => {
             deck.push(returnToDeck)
             removeImage.removeChild(removeImage.lastChild)
             player.handValue = 0
-            console.log(returnToDeck)
+            // console.log(returnToDeck)
         }
     }
     let x = house.handArr.length
@@ -437,12 +433,12 @@ const deal = () => {
             removeHouseImage.removeChild(removeHouseImage.lastChild)
             house.handValue = 0
             deck.push(returnToDeckHouse)
-            console.log(returnToDeckHouse)
+            // console.log(returnToDeckHouse)
         }
     }
-    // if more than 0, pop() both arrays and push() both cards back into the deck
     // once playerHand and houseHand are empty run shuffle
     shuffle(deck)
+
     // hit player twice
     for(let i = 0; i < 2; i++) {
         hit()
@@ -453,13 +449,15 @@ const deal = () => {
     }
 }
 
+// Event listeners
 const dealButton = document.getElementById('deal')
 dealButton.addEventListener('click', deal)
 
-// Win condition
-// house.handValue < player.handValue <= 21  
+const standButton = document.getElementById('stand')
+standButton.addEventListener('click', stand)
 
-// Aces
+const hitButton = document.getElementById('hit')
+hitButton.addEventListener('click', hit)
 
 // Shuffling the deck
 const shuffle = (deck) => {
@@ -472,5 +470,3 @@ const shuffle = (deck) => {
     }
     console.log(deck)
 }
-
-// if player has no cards or winner declared, deal 2 cards on hit. Otherwise, deal one
