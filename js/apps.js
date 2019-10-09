@@ -447,7 +447,7 @@ let houseHit = () => {
     }
 
     house.handArr.push(topCard)
-    console.log('House', house)
+    console.log('House', house.handArr)
 
 }
 
@@ -481,8 +481,11 @@ const stand = () => {
         else if(house.handValue < 18) {
             houseHit()
         } else {
-            if(house.handValue > player.handValue) {
-                setTimeout(() => {alert('The House wins')}, 500)
+            if(player.handValue > 21) {
+                setTimeout(() => {alert('The Player Loses')}, 500)
+                return
+            } else if(house.handValue > player.handValue) {
+                setTimeout(() => {alert('The House Wins')}, 500)
                 console.log('4')
                 return
             } else if(house.handValue === player.handValue) {
