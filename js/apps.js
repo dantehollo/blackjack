@@ -374,6 +374,7 @@ const calHouseHand = (keyValue) => {
     house.handValue = newVal
     houseHeading.innerHTML = `House: ${house.handValue}`
 }
+
 // Adding Cards to the House's UI
 let addCardHouse = (source) => {
     let card = document.createElement('img')
@@ -391,6 +392,17 @@ const flipCard = () => {
     backCover.setAttribute("class", "card")
     let hand = document.getElementsByClassName('house-hand')[0]
     hand.append(backCover)
+}
+
+// Shuffling the deck
+const shuffle = (deck) => {
+    for(let i = 0; i < 100; i++) {
+        let locationOne = Math.floor((Math.random() * deck.length))
+        let locationTwo = Math.floor((Math.random() * deck.length))
+        let tmp = deck[locationOne]
+        deck[locationOne] = deck[locationTwo]
+        deck[locationTwo] = tmp
+    }
 }
 
 // Creating Hit
@@ -415,26 +427,27 @@ let hit = () => {
     
     if (player.handValue > 21) {
         setTimeout(() => {alert("Player Loses")}, 500)
-        return
     }
 }
 
 // House's Hit
 let houseHit = () => {
     let topCard = deck.pop()
-    
-        calHouseHand(topCard)
+    let topCardSource = topCard.src
+    console.log(topCardSource)
+    calHouseHand(topCard)
     
     // Placing the card in the UI
     if(house.handArr.length === 0) {
         flipCard()
-        // console.log('Face down')
+        console.log(topCardSource)
     } else {
         addCardHouse(topCard)
         // console.log('Face up')
     }
 
     house.handArr.push(topCard)
+    console.log('House', house)
 
 }
 
@@ -532,14 +545,3 @@ standButton.addEventListener('click', stand)
 
 const hitButton = document.getElementById('hit')
 hitButton.addEventListener('click', hit)
-
-// Shuffling the deck
-const shuffle = (deck) => {
-    for(let i = 0; i < 100; i++) {
-        let locationOne = Math.floor((Math.random() * deck.length))
-        let locationTwo = Math.floor((Math.random() * deck.length))
-        let tmp = deck[locationOne]
-        deck[locationOne] = deck[locationTwo]
-        deck[locationTwo] = tmp
-    }
-}
