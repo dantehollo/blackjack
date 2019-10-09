@@ -340,21 +340,38 @@ houseHeading.innerHTML = `House: ${houseScore}`
 const switchAces = (array) => {
     for( let i = 0; i < player.handArr.length; i++) {
         if(player.handArr[i].value === 11) {
-            // console.log(player.handArr[i].value)
             player.handArr[i].value = 1
             oneAce = player.handArr[i]
-            console.log(oneAce)
             calPlayerHand(oneAce)
-            console.log(player.handArr)
+        }
+    }
+}
+
+// Switching Aces for House
+const switchAcesHouse = (array) => {
+    for( let i = 0; i < house.handArr.length; i++) {
+        if(house.handArr[i].value === 11) {
+            house.handArr[i].value = 1
+            oneAce = house.handArr[i]
+            console.log(oneAce)
+            calHouseHand(oneAce)
+            console.log(house.handArr)
             console.log('tripped')
         }
     }
 }
 
+// Adding Functions
 const calPlayerHand = (keyValue) => {
     let newVal = keyValue.value + player.handValue
     player.handValue = newVal
     playerHeading.innerHTML = `Player: ${player.handValue}`
+}
+
+const calHouseHand = (keyValue) => {
+    let newVal = keyValue.value + house.handValue
+    house.handValue = newVal
+    houseHeading.innerHTML = `House: ${house.handValue}`
 }
 
 // Creating Hit
@@ -362,13 +379,11 @@ let hit = () => {
     let topCard = deck.pop()
     
     if(player.handValue < 21) {
-        calPlayerHand(topCard, player.handValue)
+        calPlayerHand(topCard)
     } else {
-        // alert('Player Loses')
         switchAces(player.handArr)
     }
     player.handArr.push(topCard)
-    // console.log(player.handValue)
     
     // Placing the Card in the UI
     let card = document.createElement('img')
@@ -381,17 +396,20 @@ let hit = () => {
         setTimeout(() => {alert("Player Loses")}, 500
     )
     }
-    console.log('player', player)
+    // console.log('player', player)
 }
 
-// Dealer's Hit
+// House's Hit
 let houseHit = () => {
     let topCard = deck.pop()
-    let newVal = topCard.value + house.handValue
-    house.handValue = newVal
-    houseHeading.innerHTML = `House: ${house.handValue}`
+    
+    if(house.handValue < 21) {
+        calHouseHand(topCard)
+    } else {
+        switchAcesHouse(house.handArr)
+        // console.log('tripped')
+    }
     house.handArr.push(topCard)
-    // console.log(house.handValue)
     
     // Placing the card in the UI
     let card = document.createElement('img')
@@ -399,25 +417,31 @@ let houseHit = () => {
     card.setAttribute("class", "card")
     const hand = document.getElementsByClassName('house-hand')[0]
     hand.append(card)
-    console.log('house', house)
-
+    // console.log('house', house)
 }
 
 // Creating stand
 const stand = () => {
 
     for(let i = 0; i < 10; i++) {
+        // Switch Aces for the House
+        switchAcesHouse(house.handArr)
         // if house.handValue > 21 ---> alert Player wins!
         if(house.handValue > 21) {
             setTimeout(() => {alert('The Player Wins!')}, 500)
+            console.log('1')
             return
         } 
         // else if house.handValue === 21 ---> compare to player.handValue 
         else if(house.handValue === 21) {
             if(house.handValue > player.handValue) {
                 setTimeout(() => {alert('The House Wins')}, 500)
+                console.log('2')
+                return
             } else if(house.handValue === player.handValue) {
                 setTimeout(() => {alert("Draw Game")}, 500)
+                console.log('3')
+                return
             }
         } 
         // otherwise hit again
@@ -425,13 +449,16 @@ const stand = () => {
             houseHit()
         } else {
             if(house.handValue > player.handValue) {
-                alert('The House wins')
+                setTimeout(() => {alert('The House wins')}, 500)
+                console.log('4')
                 return
             } else if(house.handValue === player.handValue) {
-                alert('Draw Game')
+                setTimeout(() => {alert('Draw Game')}, 500)
+                console.log('5')
                 return
             } else if (house.handValue < player.handValue) {
-                alert('The Player Wins')
+                setTimeout(() => {alert('The Player Wins')}, 500)
+                console.log('6')
                 return
             }
         }
@@ -495,5 +522,4 @@ const shuffle = (deck) => {
         deck[locationOne] = deck[locationTwo]
         deck[locationTwo] = tmp
     }
-    // console.log(deck)
 }
