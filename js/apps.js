@@ -378,9 +378,9 @@ let hit = () => {
     hand.append(card)
 
     if(player.handValue > 21) {
-        alert("Player Loses")
+        setTimeout(() => {alert("Player Loses")}, 500
+    )
     }
-
     console.log('player', player)
 }
 
@@ -409,15 +409,15 @@ const stand = () => {
     for(let i = 0; i < 10; i++) {
         // if house.handValue > 21 ---> alert Player wins!
         if(house.handValue > 21) {
-            alert('The Player Wins!')
+            setTimeout(() => {alert('The Player Wins!')}, 500)
             return
         } 
         // else if house.handValue === 21 ---> compare to player.handValue 
         else if(house.handValue === 21) {
             if(house.handValue > player.handValue) {
-                alert('The House Wins')
+                setTimeout(() => {alert('The House Wins')}, 500)
             } else if(house.handValue === player.handValue) {
-                alert("Draw Game")
+                setTimeout(() => {alert("Draw Game")}, 500)
             }
         } 
         // otherwise hit again
