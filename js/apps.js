@@ -342,7 +342,9 @@ const switchAces = (array) => {
         if(player.handArr[i].value === 11) {
             player.handArr[i].value = 1
             oneAce = player.handArr[i]
+            console.log('Aces Switched')
             calPlayerHand(oneAce)
+            console.log('score recal')
         }
     }
 }
@@ -353,10 +355,8 @@ const switchAcesHouse = (array) => {
         if(house.handArr[i].value === 11) {
             house.handArr[i].value = 1
             oneAce = house.handArr[i]
-            console.log(oneAce)
             calHouseHand(oneAce)
-            console.log(house.handArr)
-            console.log('tripped')
+            // console.log(i)
         }
     }
 }
@@ -366,12 +366,31 @@ const calPlayerHand = (keyValue) => {
     let newVal = keyValue.value + player.handValue
     player.handValue = newVal
     playerHeading.innerHTML = `Player: ${player.handValue}`
+    console.log('render score')
 }
 
 const calHouseHand = (keyValue) => {
     let newVal = keyValue.value + house.handValue
     house.handValue = newVal
     houseHeading.innerHTML = `House: ${house.handValue}`
+}
+// Adding Cards to the House's UI
+let addCardHouse = (source) => {
+    let card = document.createElement('img')
+    card.setAttribute("src", source.src)
+    card.setAttribute("class", "card")
+    const hand = document.getElementsByClassName('house-hand')[0]
+    hand.append(card)
+    // console.log('function works')
+}
+
+// Flip first card in the house's hand
+const flipCard = () => {
+    let backCover = document.createElement('img')
+    backCover.setAttribute("src", "img/cards/back-covers/Pomegranate.png")
+    backCover.setAttribute("class", "card")
+    let hand = document.getElementsByClassName('house-hand')[0]
+    hand.append(backCover)
 }
 
 // Creating Hit
@@ -382,7 +401,9 @@ let hit = () => {
         calPlayerHand(topCard)
     } else {
         switchAces(player.handArr)
+        console.log('conditional triggered')
     }
+
     player.handArr.push(topCard)
     
     // Placing the Card in the UI
@@ -391,33 +412,30 @@ let hit = () => {
     card.setAttribute("class", "card")
     const hand = document.getElementsByClassName('player-hand')[0]
     hand.append(card)
-
-    if(player.handValue > 21) {
-        setTimeout(() => {alert("Player Loses")}, 500
-    )
+    
+    if (player.handValue > 21) {
+        setTimeout(() => {alert("Player Loses")}, 500)
+        return
     }
-    // console.log('player', player)
 }
 
 // House's Hit
 let houseHit = () => {
     let topCard = deck.pop()
     
-    if(house.handValue < 21) {
         calHouseHand(topCard)
-    } else {
-        switchAcesHouse(house.handArr)
-        // console.log('tripped')
-    }
-    house.handArr.push(topCard)
     
     // Placing the card in the UI
-    let card = document.createElement('img')
-    card.setAttribute("src", topCard.src)
-    card.setAttribute("class", "card")
-    const hand = document.getElementsByClassName('house-hand')[0]
-    hand.append(card)
-    // console.log('house', house)
+    if(house.handArr.length === 0) {
+        flipCard()
+        // console.log('Face down')
+    } else {
+        addCardHouse(topCard)
+        // console.log('Face up')
+    }
+
+    house.handArr.push(topCard)
+
 }
 
 // Creating stand
@@ -425,7 +443,9 @@ const stand = () => {
 
     for(let i = 0; i < 10; i++) {
         // Switch Aces for the House
-        switchAcesHouse(house.handArr)
+        if(house.handValue > 21) {    
+            switchAcesHouse(house.handArr)
+        }
         // if house.handValue > 21 ---> alert Player wins!
         if(house.handValue > 21) {
             setTimeout(() => {alert('The Player Wins!')}, 500)
